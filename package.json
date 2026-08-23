@@ -5,7 +5,7 @@
   "main": "dist/health.js",
   "scripts": {
     "build": "tsc --noEmitOnError",
-    "test": "npm run build && node --test dist/tests/health.test.js",
+    "test": "npm run build && node --test dist/health.test.js",
     "typecheck": "tsc --noEmit",
     "start": "node dist/health.js"
   },
