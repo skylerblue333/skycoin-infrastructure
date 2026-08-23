@@ -1,15 +1,19 @@
 {
-  "name": "skycoin4444-module",
+  "name": "skycoin-infrastructure",
   "version": "1.0.0",
-  "description": "Production-grade SKYCOIN4444 module",
-  "main": "dist/index.js",
+  "description": "Infrastructure health and deployment support component for SKYCOIN4444",
+  "main": "dist/health.js",
   "scripts": {
-    "build": "tsc || echo 'Build completed'",
-    "test": "echo 'Tests passing'",
-    "lint": "echo 'Linting passed'",
-    "start": "node dist/index.js"
+    "build": "tsc --noEmitOnError",
+    "test": "npm run build && node --test dist/tests/health.test.js",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/health.js"
   },
-  "keywords": ["skycoin4444", "production"],
+  "keywords": ["skycoin4444", "infrastructure", "health", "devops"],
   "author": "SKYCOIN4444",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
+  }
 }
