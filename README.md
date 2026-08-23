@@ -1,44 +1,70 @@
 # Skycoin Infrastructure
 
-Infrastructure and DevOps support component for the SKYCOIN4444 ecosystem.
+Small infrastructure/operations foundation for the SKYCOIN4444 ecosystem.
 
-## Current repository evidence
+## What is actually implemented
 
-- Public TypeScript repository on `main`.
-- Docker, Docker Compose, and GitHub Actions configuration are present.
-- A real HTTP `/healthz` service contract is now implemented in `src/health.ts`.
-- A unit test for the health payload is present in `tests/health.test.ts`.
-- Build/typecheck/test scripts now invoke real tooling rather than printing success or suppressing TypeScript failures.
+- Dependency-light Node HTTP `/healthz` endpoint.
+- Typed health payload.
+- Unit test using Node's built-in test runner.
+- TypeScript build and typecheck scripts.
+- Docker / Compose / GitHub Actions configuration present in the repository.
+
+The implementation is intentionally small. This repository is an **infrastructure primitive**, not a complete production deployment platform.
+
+## Commands
+
+```bash
+npm ci
+npm run build
+npm run typecheck
+npm test
+npm start
+```
+
+`npm test` builds the project and executes the compiled test suite.
 
 ## Ecosystem role
 
-**Infrastructure / Deployment → Health & Service Operations**
+```text
+SKYCOIN4444 Services
+        ↓
+Infrastructure Boundary
+        ↓
+Health / Operational Checks
+        ↓
+Canonical Deployment Platform
+```
 
-This repository provides a small operational foundation that can be reused by canonical SKYCOIN4444 services. It should not become a second deployment platform or orchestration system.
+Useful infrastructure patterns should be promoted into the canonical deployment boundary rather than duplicated across repositories.
 
-## Gap filled in this pass
-
-The repository previously contained infrastructure metadata but no verified application-level health implementation and used placeholder validation scripts. This pass added a minimal dependency-light `/healthz` endpoint and a real unit test, then replaced placeholder package scripts with TypeScript build/typecheck/test commands.
-
-## Truthful status
+## Current verification status
 
 - Health implementation: **present**
-- Unit test: **present**
-- Real build/typecheck commands: **configured**
-- Canonical infrastructure integration: **pending runtime/CI verification**
-- Deployment: **not verified**
+- Unit test source: **present**
+- Build/typecheck commands: **configured**
+- CI execution: **not verified in this audit**
+- Deployed `/healthz`: **not verified**
+- Production deployment: **not verified**
 - Production readiness: **not claimed**
 
-## Consolidation approach
+## Remaining production work
 
-Preserve useful Docker, CI, and operational configuration. Compare this repository with the larger infrastructure/deployment repositories and canonical production stack. Promote the strongest verified health, deployment, observability, and operational patterns into the canonical infrastructure boundary rather than maintaining parallel systems.
+A production infrastructure boundary still requires deployment verification, service discovery, secrets management, TLS, observability, alerting, backups, restore testing, rollback procedures, and authenticated service checks as appropriate to the canonical architecture.
 
-For missing infrastructure capabilities, prefer mature public open-source foundations (for example established reverse proxies, orchestrators, observability systems, or IaC tooling) after reviewing maintenance, security, compatibility, and licenses. Do not copy large external codebases merely to increase repository size.
-
-## Verification required before production
-
-Run `npm ci`, `npm run build`, `npm run typecheck`, and `npm test` in CI; verify the `/healthz` endpoint in a deployed environment; then add authenticated service checks, observability, secrets management, backups, rollback procedures, TLS, and deployment evidence appropriate to the canonical platform.
+For missing capabilities, prefer mature public open-source infrastructure foundations after reviewing maintenance, security, compatibility, and licenses. Do not copy external code merely to increase LOC.
 
 ## License
 
 MIT, subject to the checked-in license and applicable third-party dependency licenses.
+
+## Authorship
+
+Developed by **Skyler Blue Spillers** with human, open-source, automation, and AI-assisted engineering. AI assistance does not imply solely AI-authored work.
+
+## SKYCOIN4444
+
+- https://skycoin4444.com
+- https://skycoin4444.net
+- https://skycoin4444.shop
+- https://skycoin44.token
